@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Asadbek's Ranking System launcher
+
+PROJECT_DIR="$HOME/Projects/asadbeks-ranking-system"
+
+# venv ni faollashtirish
+if [ -f "$PROJECT_DIR/.venv/bin/activate" ]; then
+    source "$PROJECT_DIR/.venv/bin/activate"
+fi
+
+cd "$PROJECT_DIR" || exit 1
+exec python main.py "$@"

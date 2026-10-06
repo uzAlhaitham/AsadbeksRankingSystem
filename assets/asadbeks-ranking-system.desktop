@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Asadbek's Ranking System
+Comment=Genshin Impact profile viewer with Akasha ranking
+Exec=asadbeks-ranking-system
+Icon=asadbeks-ranking-system
+Terminal=false
+Categories=Game;Utility;
+Keywords=genshin;impact;akasha;ranking;enka;artifact;
+StartupNotify=true
+StartupWMClass=asadbeks-ranking-system
