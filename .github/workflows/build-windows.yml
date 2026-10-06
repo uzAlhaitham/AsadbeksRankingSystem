@@ -1,0 +1,37 @@
+name: Build Windows .exe
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PySide6 pyinstaller pillow
+
+      - name: Convert icon to ICO
+        run: |
+          python -c "from PIL import Image; img = Image.open('assets/icon_256.png'); img.save('assets/icon.ico', sizes=[(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)])"
+
+      - name: Build .exe
+        run: |
+          pyinstaller --noconfirm --windowed --onefile --name "AsadbeksRankingSystem" --icon "assets/icon.ico" --add-data "src;src" --add-data "assets;assets" --hidden-import PySide6.QtSvg --hidden-import PySide6.QtNetwork main.py
+
+      - name: Upload .exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: AsadbeksRankingSystem-Windows
+          path: dist/AsadbeksRankingSystem.exe
+          retention-days: 30
